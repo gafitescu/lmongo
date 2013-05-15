@@ -232,6 +232,23 @@ $users = LMongo::collection('users')
 ```
 There are more where methods in [Query/Builder.php](src/LMongo/Query/Builder.php) file.
 
+If you want to do a search for MongoId you will have
+to convert the string with the hash id
+
+```php
+LMongo::collection('users')
+        ->where('_id',new MongoId("$_id"))
+```
+
+**Chaining multiple Where conditions**
+
+```php
+LMongo::collection('users')
+                        ->where('email', $email)
+                        ->andWhereNe('first_name', $first_name)
+                        ->get()
+```
+
 **Order By**
 
 ```php
